@@ -23,7 +23,7 @@ const cropRecommendationSchema = new Schema(
             type: Number,
             required: true,
         },
-        phosphorous: {
+        phosphorus: {
             type: Number,
             required: true,
         },
