@@ -51,6 +51,10 @@ const fertilizerRecommendationSchema = new Schema(
             type: String,
             required: true,
         },
+        remark:{
+            type: String,
+            required: true,
+        }
     },
     {
         timestamps: true,
