@@ -3,7 +3,7 @@ import mongoose, { Schema } from "mongoose"
 const diseaseIdentificationSchema = new Schema(
     {
         userId: {
-            type: mongoose.Schema.type.ObjectId,
+            type: mongoose.Schema.Types.ObjectId,
             ref: "User",
             required: true
         },
@@ -17,6 +17,14 @@ const diseaseIdentificationSchema = new Schema(
             required: true
         },
         diagnosedDisease: {
+            type: String,
+            required: true
+        },
+        confidence: {
+            type: Number,
+            required: true
+        },
+        cure: {
             type: String,
             required: true
         }

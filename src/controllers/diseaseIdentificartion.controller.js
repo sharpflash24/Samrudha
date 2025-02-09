@@ -1,5 +1,6 @@
 import DiseaseIdentification from "../models/diseaseIdentification.model.js"
 import { uploadOnCloudinary } from "../utils/cloudinary.js";
+import axios from "axios";
 // import { upload } from "../middlewares/multer.middleware.js"
 
 
@@ -17,14 +18,25 @@ export const identifyDisease = async (req, res) => {
         }
 
         // Get data from request
-        const { cropName, diagnosedDisease, solution } = req.body;
+        const mlResponse = await axios.post("// here will the fast API of the ML model to get the repsponse", {
+            imageUrl: cloudinaryResponse.secure_url
+        })
+
+        if (!mlResponse.data || mlResponse.data.error ){
+            return res.status(500).json({ error: "Failed to get disease identification from ML model"})
+        }
+
+        const { diagnosedDisease, confidence, cure } = mlResponse.data;
+
 
         // Create a new disease record
         const disease = new DiseaseIdentification({
             userId: req.user.id, 
-            cropName,
+            cropName: req.body.cropName,
             imageUrl: cloudinaryResponse.secure_url, // Cloudinary image URL
             diagnosedDisease,
+            confidence,
+            cure
         });
 
         await disease.save();
