@@ -30,6 +30,10 @@ const yieldPredictionSchema = new Schema(
         rainfall: {
             type: Number,
             required: true
+        },
+        predictedYield: {
+            type: Number,
+            required: true
         }
     }, 
     {
