@@ -3,7 +3,6 @@ import { uploadOnCloudinary } from "../utils/cloudinary.js";
 import axios from "axios";
 // import { upload } from "../middlewares/multer.middleware.js"
 
-
 export const identifyDisease = async (req, res) => {
     try {
         if (!req.file) {
