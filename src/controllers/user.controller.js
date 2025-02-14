@@ -40,7 +40,11 @@ const registerUser = asyncHandler(  async (req, res) => {
         throw new ApiError(400, "User with this email or phone number already exists")
     }
 
-    const profileImageLocalPath = req.files?.profileImage[0]?.path;
+    // const profileImageLocalPath = req.files?.profileImage[0]?.path;
+    let profileImageLocalPath;
+    if (req.files && Array.isArray(req.files.profileImage) && req.files.profileImage.length > 0) {
+        profileImageLocalPath = req.files.profileImage[0].path
+    }
 
     const profileImage = await uploadOnCloudinary(profileImageLocalPath)
 
